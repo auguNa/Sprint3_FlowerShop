@@ -21,5 +21,4 @@ public class Flower extends Product {
                 ", color=" + color +
                 '}';
     }
-
 }

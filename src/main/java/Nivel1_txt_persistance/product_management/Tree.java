@@ -8,6 +8,7 @@ public class Tree extends Product {
         this.height = height;
     }
 
+
     @Override
     public String getAttribute() {
         return String.valueOf(height);
@@ -22,3 +23,4 @@ public class Tree extends Product {
                 '}';
     }
 }
+

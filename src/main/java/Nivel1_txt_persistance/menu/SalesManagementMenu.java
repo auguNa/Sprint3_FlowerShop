@@ -2,8 +2,10 @@ package Nivel1_txt_persistance.menu;
 
 import Nivel1_txt_persistance.florist.Florist;
 import Nivel1_txt_persistance.florist.Ticket;
+import Nivel1_txt_persistance.product_management.Product;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +24,7 @@ public class SalesManagementMenu {
             System.out.println("1.- Create Purchase Ticket");
             System.out.println("2.- Show List of Old Purchases");
             System.out.println("3.- View Total Money Earned from All Sales");
-            System.out.println("0.- Back to Main Menu");
+            System.out.println("0.- Back to Nivel1_txt_persistance.Main Menu");
 
             option = sc.nextInt();
             sc.nextLine();
@@ -143,4 +145,4 @@ public class SalesManagementMenu {
     }
 }
 
-}
+

@@ -1,17 +1,15 @@
 package Nivel1_txt_persistance.menu;
 
-import Nivel1_txt_persistance.factory.ProductFactory;
 import Nivel1_txt_persistance.florist.Florist;
-
 import java.util.Scanner;
 
 public class MainMenu {
     Scanner sc = new Scanner(System.in);
     private Florist florist;
-    private final ProductFactory factory;
+    private final nivel_1.factory.ProductFactory factory;
 
     public MainMenu() {
-        factory = ProductFactory.getInstance();
+        factory = nivel_1.factory.ProductFactory.getInstance();
     }
 
     public void start() {
@@ -32,7 +30,7 @@ public class MainMenu {
                     if (florist == null) {
                         System.out.println("Please create a florist first.");
                     } else {
-                        new StockManagementMenu(florist, factory).manageStock(sc);
+                        new nivel_1.menu.StockManagementMenu(florist, factory).manageStock(sc);
                     }
                     break;
                 case 3:

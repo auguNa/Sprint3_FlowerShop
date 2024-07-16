@@ -1,18 +1,18 @@
-package Nivel1_txt_persistance.menu;
+package nivel_1.menu;
 
-import Nivel1_txt_persistance.factory.ProductFactory;
+import Nivel1_txt_persistance.*;
 import Nivel1_txt_persistance.florist.Florist;
-import com.sun.source.tree.Tree;
+import Nivel1_txt_persistance.product_management.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+
+
+import java.util.*;
 
 public class StockManagementMenu {
     private Florist florist;
-    private ProductFactory factory;
+    private nivel_1.factory.ProductFactory factory;
 
-    public StockManagementMenu(Florist florist, ProductFactory factory) {
+    public StockManagementMenu(Florist florist, nivel_1.factory.ProductFactory factory) {
         this.florist = florist;
         this.factory = factory;
     }
@@ -138,5 +138,3 @@ public class StockManagementMenu {
         System.out.println("Total stock value: €" + totalValue);
     }
 }
-
-

@@ -1,10 +1,14 @@
-package Nivel1_txt_persistance.factory;
+package nivel_1.factory;
 
-import com.sun.source.tree.Tree;
+
+import Nivel1_txt_persistance.product_management.*;
+
 
 public class ProductFactory {
+    private static ProductFactory instance;
+
     private ProductFactory() {
-}
+    }
 
     public static ProductFactory getInstance() {
         if (instance == null) {

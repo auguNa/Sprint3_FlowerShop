@@ -1,6 +1,9 @@
 package Nivel1_txt_persistance.florist;
 
+import Nivel1_txt_persistance.product_management.Product;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class Ticket implements Serializable {
     private List<Product> products;

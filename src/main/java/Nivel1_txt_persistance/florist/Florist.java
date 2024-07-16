@@ -1,7 +1,10 @@
 package Nivel1_txt_persistance.florist;
 
+import Nivel1_txt_persistance.product_management.Product;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Florist {
     private static final String STOCK_FILE = "stock.txt";
