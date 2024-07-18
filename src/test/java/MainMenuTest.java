@@ -1,5 +1,3 @@
-//for testing use mvn test in the terminal
-
 import Nivel1_txt_persistance.menu.MainMenu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +7,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class MainMenuTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private MainMenu mainMenu;
@@ -29,7 +28,7 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
-        assertEquals(true, output.contains("Florist 'FloristName' created "));
+        assertTrue(output.contains("Florist 'FloristName' created"));
     }
 
     @Test
@@ -41,7 +40,7 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
-        assertEquals(true, output.contains("Please create a florist first."));
+        assertTrue(output.contains("Please create a florist first."));
     }
 
     @Test
@@ -53,7 +52,7 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
-        assertEquals(true, output.contains("Please create a florist first."));
+        assertTrue(output.contains("Please create a florist first."));
     }
 
     @Test
@@ -65,7 +64,6 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
-        assertEquals(true, output.contains("Florist already exists: FloristName"));
+        assertTrue(output.contains("Florist already exists: FloristName"));
     }
 }
-
