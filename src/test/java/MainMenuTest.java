@@ -1,3 +1,5 @@
+//for testing use mvn test in the terminal
+
 import Nivel1_txt_persistance.menu.MainMenu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +10,6 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class MainMenuTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private MainMenu mainMenu;
