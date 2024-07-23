@@ -1,19 +1,17 @@
 package Nivel1_txt_persistance.menu;
 
-import Nivel1_txt_persistance.florist.Florist;
-import Nivel1_txt_persistance.florist.Ticket;
+import Nivel1_txt_persistance.florist_management.FloristManagement;
+import Nivel1_txt_persistance.persistence.Ticket;
 import Nivel1_txt_persistance.product_management.Product;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class SalesManagementMenu {
     Scanner sc = new Scanner(System.in);
-    private Florist florist;
+    private FloristManagement florist;
 
-    public SalesManagementMenu(Florist florist) {
+    public SalesManagementMenu(FloristManagement florist) {
         this.florist = florist;
     }
 
@@ -24,7 +22,7 @@ public class SalesManagementMenu {
             System.out.println("1.- Create Purchase Ticket");
             System.out.println("2.- Show List of Old Purchases");
             System.out.println("3.- View Total Money Earned from All Sales");
-            System.out.println("0.- Back to Nivel1_txt_persistance.Main Menu");
+            System.out.println("0.- Back to Main Menu");
 
             option = sc.nextInt();
             sc.nextLine();
@@ -91,14 +89,31 @@ public class SalesManagementMenu {
                 System.out.println("Not enough stock available for the specified product.");
             }
         }
-
         if (!purchasedProducts.isEmpty()) {
             Ticket ticket = new Ticket(purchasedProducts);
             florist.addSale(ticket);
             System.out.println("Purchase ticket created.");
+            printTicketSummary(ticket);
         } else {
             System.out.println("No products purchased.");
         }
+    }
+
+    private void printTicketSummary(Ticket ticket) {
+        System.out.println("\n--- Purchase Ticket Summary ---");
+        Map<String, Integer> productSummary = new HashMap<>();
+
+        for (Product product : ticket.getProducts()) {
+            String productKey = product.getClass().getSimpleName() + " (" + product.getAttribute() + ")";
+            productSummary.put(productKey, productSummary.getOrDefault(productKey, 0) + 1);
+        }
+
+        for (Map.Entry<String, Integer> entry : productSummary.entrySet()) {
+            System.out.println("Product: " + entry.getKey() + ", Quantity: " + entry.getValue());
+        }
+
+        System.out.println("Total Value: €" + ticket.getTotalValue());
+        System.out.println("------------------------------\n");
     }
 
     private boolean checkStock(String type, String attribute, int quantity) {

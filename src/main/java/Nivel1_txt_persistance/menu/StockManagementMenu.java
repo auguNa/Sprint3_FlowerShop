@@ -1,18 +1,17 @@
-package nivel_1.menu;
+package Nivel1_txt_persistance.menu;
 
-import Nivel1_txt_persistance.*;
-import Nivel1_txt_persistance.florist.Florist;
+import Nivel1_txt_persistance.exception.InvalidDecorationType;
+import Nivel1_txt_persistance.florist_management.FloristManagement;
 import Nivel1_txt_persistance.product_management.*;
-
 
 
 import java.util.*;
 
 public class StockManagementMenu {
-    private Florist florist;
+    private FloristManagement florist;
     private nivel_1.factory.ProductFactory factory;
 
-    public StockManagementMenu(Florist florist, nivel_1.factory.ProductFactory factory) {
+    public StockManagementMenu(FloristManagement florist, nivel_1.factory.ProductFactory factory) {
         this.florist = florist;
         this.factory = factory;
     }
@@ -92,13 +91,24 @@ public class StockManagementMenu {
     }
 
     private void addDecoration(Scanner sc) {
-        System.out.println("Enter price:");
-        double price = sc.nextDouble();
-        System.out.println("Enter material (wood/plastic):");
-        String material = sc.next();
-        Product decoration = factory.createProduct("decoration", price, material);
-        florist.addProduct(decoration);
-        System.out.println("Decoration added.");
+        try {
+            System.out.println("Enter price:");
+
+            double price = sc.nextDouble();
+            System.out.println("Enter material (wood/plastic):");
+            String material = sc.next();
+            if (!material.equalsIgnoreCase("wood") && !material.equalsIgnoreCase("plastic")) {
+                throw new InvalidDecorationType("Invalid material type: " + material);
+            }
+            Product decoration = factory.createProduct("decoration", price, material);
+            florist.addProduct(decoration);
+            System.out.println("Decoration added.");
+        } catch (InvalidDecorationType e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid number for the price.");
+            sc.next();
+        }
     }
 
     private void removeProduct(Scanner sc, Class<? extends Product> type) {

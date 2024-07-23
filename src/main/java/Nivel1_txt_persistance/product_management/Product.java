@@ -1,6 +1,10 @@
 package Nivel1_txt_persistance.product_management;
 
-public abstract class Product {
+import java.io.Serializable;
+
+public abstract class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private static int counter = 1;
     private final int id;
     private double price;

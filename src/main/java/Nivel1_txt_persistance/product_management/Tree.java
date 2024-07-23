@@ -1,6 +1,10 @@
 package Nivel1_txt_persistance.product_management;
 
-public class Tree extends Product {
+import java.io.Serializable;
+
+public class Tree extends Product  {
+
+
     private double height;
 
     public Tree(double price, double height) {

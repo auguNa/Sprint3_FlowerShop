@@ -1,4 +1,4 @@
-package Nivel1_txt_persistance.florist;
+package Nivel1_txt_persistance.persistence;
 
 import Nivel1_txt_persistance.product_management.Product;
 
@@ -14,6 +14,9 @@ public class Ticket implements Serializable {
 
     public double getTotalValue() {
         return products.stream().mapToDouble(Product::getPrice).sum();
+    }
+    public List<Product> getProducts() {
+        return products;
     }
 
     @Override

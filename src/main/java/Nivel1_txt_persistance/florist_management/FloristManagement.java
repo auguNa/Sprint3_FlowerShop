@@ -1,19 +1,20 @@
-package Nivel1_txt_persistance.florist;
+package Nivel1_txt_persistance.florist_management;
 
+import Nivel1_txt_persistance.persistence.Ticket;
 import Nivel1_txt_persistance.product_management.Product;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Florist {
+public class FloristManagement {
     private static final String STOCK_FILE = "stock.txt";
     private static final String SALES_FILE = "sales.txt";
     private String name;
     private ArrayList<Product> stock;
     private ArrayList<Ticket> sales;
 
-    public Florist(String name) {
+    public FloristManagement(String name) {
         this.stock = new ArrayList<>();
         this.sales = new ArrayList<>();
         this.name = name;
@@ -60,7 +61,7 @@ public class Florist {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(STOCK_FILE))) {
             oos.writeObject(stock);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -70,7 +71,7 @@ public class Florist {
         } catch (FileNotFoundException e) {
             System.out.println("Stock file not found. Starting with an empty stock.");
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -78,7 +79,7 @@ public class Florist {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(SALES_FILE))) {
             out.writeObject(sales);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -88,7 +89,7 @@ public class Florist {
         } catch (FileNotFoundException e) {
             System.out.println("Sales file not found. Starting with no sales.");
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
