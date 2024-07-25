@@ -92,6 +92,7 @@ public class FloristManagement {
                     stock.add(product);
                 } else if(doc.getString("type").equals("decoration")) {
                     Product product = new Decoration(price, null);
+                    stock.add(product);
                 }
             }
         }
