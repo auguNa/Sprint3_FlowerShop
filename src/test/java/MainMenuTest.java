@@ -7,7 +7,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertEquals;
+=======
+import static org.junit.jupiter.api.Assertions.assertTrue;
+>>>>>>> aee5b3a588a5c52a4e6510f379d2ea7c629288bb
 
 public class MainMenuTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -28,7 +32,11 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
+<<<<<<< HEAD
         assertEquals(true, output.contains("Florist 'FloristName' created "));
+=======
+        assertTrue(output.contains("Florist 'FloristName' created"));
+>>>>>>> aee5b3a588a5c52a4e6510f379d2ea7c629288bb
     }
 
     @Test
@@ -40,7 +48,11 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
+<<<<<<< HEAD
         assertEquals(true, output.contains("Please create a florist first."));
+=======
+        assertTrue(output.contains("Please create a florist first."));
+>>>>>>> aee5b3a588a5c52a4e6510f379d2ea7c629288bb
     }
 
     @Test
@@ -52,7 +64,11 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
+<<<<<<< HEAD
         assertEquals(true, output.contains("Please create a florist first."));
+=======
+        assertTrue(output.contains("Please create a florist first."));
+>>>>>>> aee5b3a588a5c52a4e6510f379d2ea7c629288bb
     }
 
     @Test
@@ -64,7 +80,13 @@ public class MainMenuTest {
         mainMenu.start();
 
         String output = outputStreamCaptor.toString(StandardCharsets.UTF_8);
+<<<<<<< HEAD
         assertEquals(true, output.contains("Florist already exists: FloristName"));
     }
 }
 
+=======
+        assertTrue(output.contains("Florist already exists: FloristName"));
+    }
+}
+>>>>>>> aee5b3a588a5c52a4e6510f379d2ea7c629288bb
