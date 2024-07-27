@@ -1,0 +1,212 @@
+@startuml
+
+package nivel2_sql_persistance.connection {
+    class DBConnection {
+        - URL: String
+        - USER: String
+        - PASSWORD: String
+        - connection: Connection
+        + getConnection(): Connection
+        + connect(): void
+        + close(): void
+        - loadJDBCDriver(): void
+        {static}
+    }
+}
+
+package nivel2_sql_persistance {
+    class Main {
+        + main(args: String[]): void
+    }
+}
+
+package nivel2_sql_persistance.menu {
+    class MainMenu {
+        - factory: ProductFactory
+        - sc: Scanner
+        - florist: FloristManagement
+        - floristDAO: FloristDAO
+        - stockDAO: StockDAO
+        - salesDAO: SalesDAO
+        + MainMenu()
+        + start(): void
+        - handleInvalidInput(e: InvalidInputException): void
+        - createFlorist(): void
+        - loadFloristFromDatabase(): void
+        - loadStockMenu(): void
+        - loadSalesMenu(): void
+        - exitApp(): void
+    }
+
+    class StockManagementMenu {
+        - florist: FloristManagement
+        - factory: ProductFactory
+        + StockManagementMenu(florist: FloristManagement, factory: ProductFactory)
+        + manageStock(sc: Scanner): void
+        - addTree(sc: Scanner): void
+        - addFlower(sc: Scanner): void
+        - addDecoration(sc: Scanner): void
+        - removeProduct(sc: Scanner, type: Class<? extends Product>): void
+        - printStock(): void
+        - printStockWithQuantities(): void
+        - printTotalStockValue(): void
+    }
+
+    class SalesManagementMenu {
+        - sc: Scanner
+        - florist: FloristManagement
+        + SalesManagementMenu(florist: FloristManagement)
+        + manageSales(): void
+        - createPurchaseTicket(): void
+        - printTicketSummary(ticket: Ticket): void
+        - checkStock(type: String, attribute: String, quantity: int): boolean
+        - getProductFromStock(type: String, attribute: String): Product
+        - removeProductsFromStock(type: String, attribute: String, quantity: int): void
+        - showListOfOldPurchases(): void
+        - viewTotalMoneyEarnedFromAllSales(): void
+    }
+}
+
+package nivel2_sql_persistance.dao {
+    class FloristDAO {
+        - connection: Connection
+        + FloristDAO(connection: Connection)
+        + getFloristNameFromDatabase(): String
+        + createFloristInDatabase(floristName: String): void
+    }
+
+    class SalesDAO {
+        - connection: Connection
+        + SalesDAO(connection: Connection)
+        + saveSale(ticket: Ticket): void
+        + getTicketsFromDatabase(): Map<Integer, Ticket>
+    }
+
+    class StockDAO {
+        - connection: Connection
+        + StockDAO(connection: Connection)
+        + saveNewProduct(product: Product): void
+        + getStockFromDatabase(): List<Product>
+        + updateStockValue(productId: int): void
+        + deleteProduct(id: int): void
+    }
+}
+
+package nivel2_sql_persistance.product_management {
+    class Product {
+        - id: int
+        - price: double
+        + Product(price: double)
+        + getCounter(): int
+        + getPrice(): double
+        + getId(): int
+        + setId(id: int): void
+        + getAttribute(): String
+        + toString(): String
+    }
+
+    class Flower extends Product {
+        - color: String
+        + Flower(price: double, color: String)
+        + getAttribute(): String
+        + toString(): String
+    }
+
+    class Tree extends Product {
+        - height: double
+        + Tree(price: double, height: double)
+        + getAttribute(): String
+        + toString(): String
+    }
+
+    class Decoration extends Product {
+        - material: Material
+        + Decoration(price: double, material: Material)
+        + getAttribute(): String
+        + toString(): String
+    }
+
+    enum Material {
+        WOOD
+        PLASTIC
+    }
+}
+
+package nivel2_sql_persistance.persistence {
+    class Ticket {
+        - products: List<Product>
+        + Ticket(products: List<Product>)
+        + getTotalValue(): double
+        + getProducts(): List<Product>
+        + toString(): String
+    }
+}
+
+package nivel2_sql_persistance.exception {
+    class InvalidDecorationTypeException {
+        + InvalidDecorationTypeException(s: String)
+    }
+
+    class InvalidInputException {
+        + InvalidInputException(message: String)
+    }
+}
+
+package nivel2_sql_persistance.factory {
+    class ProductFactory {
+        - instance: ProductFactory
+        + getInstance(): ProductFactory
+        + createProduct(type: String, price: double, attribute: String): Product
+        {static}
+    }
+}
+
+package nivel2_sql_persistance.florist_management {
+    class FloristManagement {
+        - connection: Connection
+        - name: String
+        - stock: List<Product>
+        - sales: List<Ticket>
+        - stockDAO: StockDAO
+        - salesDAO: SalesDAO
+        + FloristManagement(name: String, stockDAO: StockDAO, salesDAO: SalesDAO)
+        + getName(): String
+        + getStock(): List<Product>
+        + getSales(): List<Ticket>
+        + addProduct(product: Product): void
+        + removeProduct(product: Product): void
+        + addSale(ticket: Ticket): void
+        + getTotalSalesValue(): double
+        + getTotalStockValue(): double
+        + loadStock(): void
+        + loadSales(): void
+        + showListOfOldPurchases(): void
+        - saveStock(product: Product): void
+        - updateStockAfterSale(ticket: Ticket): void
+    }
+}
+
+Main ..> MainMenu : uses
+MainMenu ..> DBConnection : uses
+MainMenu ..> FloristDAO : uses
+MainMenu ..> StockDAO : uses
+MainMenu ..> SalesDAO : uses
+MainMenu ..> FloristManagement : manages
+MainMenu ..> StockManagementMenu : uses
+MainMenu ..> SalesManagementMenu : uses
+StockManagementMenu ..> FloristManagement : manages
+StockManagementMenu ..> ProductFactory : uses
+SalesManagementMenu ..> FloristManagement : manages
+ProductFactory ..> Product : creates
+ProductFactory ..> Tree : creates
+ProductFactory ..> Flower : creates
+ProductFactory ..> Decoration : creates
+ProductFactory ..> Material : uses
+FloristManagement ..> StockDAO : uses
+FloristManagement ..> SalesDAO : uses
+FloristManagement ..> Ticket : manages
+FloristManagement ..> Product : manages
+InvalidDecorationTypeException --|> InvalidInputException : extends
+SalesManagementMenu ..> InvalidInputException : uses
+StockManagementMenu ..> InvalidDecorationTypeException : uses
+@enduml

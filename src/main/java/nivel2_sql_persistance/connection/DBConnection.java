@@ -1,4 +1,4 @@
-package nivel2_sql_persistance.connection;
+package Snivel2_sql_persistance.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ public class DBConnection {
 
     private static final String URL = "jdbc:mysql://localhost:3306/flower_shop";
     private static final String USER = "flower_shop_user";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "zaq123";
 
     static {
         loadJDBCDriver();

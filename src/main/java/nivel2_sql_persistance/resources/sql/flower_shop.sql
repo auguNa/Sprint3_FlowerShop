@@ -1,0 +1,39 @@
+-- DROP DATABASE IF EXISTS flower_shop;
+-- CREATE DATABASE flower_shop;
+-- USE flower_shop;
+
+CREATE TABLE `Florist` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `florist_name` VARCHAR(100) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `Product` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `florist_id` INT NOT NULL,
+  `stock` BOOLEAN NOT NULL DEFAULT true,
+  `price` DOUBLE NOT NULL,
+  `product_type` ENUM ('DECORATION', 'FLOWER', 'TREE') NOT NULL,
+  `height` DOUBLE,
+  `color` VARCHAR(50),
+  `material` ENUM ('WOOD', 'PLASTIC'),
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (`florist_id`) REFERENCES `Florist` (`id`) ON DELETE CASCADE
+);
+
+CREATE TABLE `Ticket` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `florist_id` INT NOT NULL,
+  `sale_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`florist_id`) REFERENCES `Florist` (`id`) ON DELETE CASCADE
+);
+
+CREATE TABLE `Sale` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `ticket_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  FOREIGN KEY (`ticket_id`) REFERENCES `Ticket` (`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`) ON DELETE CASCADE
+);

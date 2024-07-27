@@ -6,6 +6,7 @@ import nivel2_sql_persistance.dao.StockDAO;
 import nivel2_sql_persistance.persistence.Ticket;
 import nivel2_sql_persistance.product_management.Product;
 
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
