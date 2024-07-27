@@ -1,9 +1,6 @@
 package nivel2_sql_persistance.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class FloristDAO {
     private Connection connection;

@@ -1,13 +1,11 @@
 package nivel2_sql_persistance.menu;
 
-import nivel2_sql_persistance.connection.DBConnection;
-import nivel2_sql_persistance.dao.FloristDAO;
 import nivel2_sql_persistance.dao.SalesDAO;
-import nivel2_sql_persistance.dao.StockDAO;
 import nivel2_sql_persistance.exception.InvalidInputException;
 import nivel2_sql_persistance.factory.ProductFactory;
 import nivel2_sql_persistance.florist_management.FloristManagement;
-import nivel2_sql_persistance.menu.SalesManagementMenu;
+import nivel2_sql_persistance.connection.DBConnection;
+import nivel2_sql_persistance.dao.*;
 
 import java.sql.Connection;
 import java.util.InputMismatchException;
@@ -99,7 +97,7 @@ public class MainMenu {
         if (florist == null) {
             System.out.println("Please, create a florist first.");
         } else {
-            new nivel2_sql_persistance.menu.StockManagementMenu(florist, factory).manageStock(sc);
+            new StockManagementMenu(florist, factory).manageStock(sc);
         }
     }
 
@@ -115,5 +113,4 @@ public class MainMenu {
         System.out.println("Application ended.");
         DBConnection.close();
     }
-
 }

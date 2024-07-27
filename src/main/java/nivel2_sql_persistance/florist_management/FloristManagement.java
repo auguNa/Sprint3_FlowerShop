@@ -1,11 +1,10 @@
 package nivel2_sql_persistance.florist_management;
 
 import nivel2_sql_persistance.connection.DBConnection;
-import nivel2_sql_persistance.dao.SalesDAO;
 import nivel2_sql_persistance.dao.StockDAO;
+import nivel2_sql_persistance.dao.SalesDAO;
 import nivel2_sql_persistance.persistence.Ticket;
-import nivel2_sql_persistance.product_management.Product;
-
+import nivel2_sql_persistance.product_management.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;

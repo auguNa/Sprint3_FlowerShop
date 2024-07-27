@@ -1,9 +1,9 @@
 package nivel2_sql_persistance.product_management;
 
-public class Decoration extends nivel2_sql_persistance.product_management.Product {
-    private nivel2_sql_persistance.product_management.Material material;
+public class Decoration extends Product {
+    private Material material;
 
-    public Decoration(double price, nivel2_sql_persistance.product_management.Material material) {
+    public Decoration(double price, Material material) {
         super(price);
         this.material = material;
     }

@@ -1,4 +1,4 @@
-package Snivel2_sql_persistance.connection;
+package nivel2_sql_persistance.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +19,7 @@ public class DBConnection {
     private DBConnection() {
     }
 
-     private static void loadJDBCDriver() {
+    private static void loadJDBCDriver() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {

@@ -1,11 +1,6 @@
 package nivel2_sql_persistance.dao;
 
-
-import nivel2_sql_persistance.product_management.Material;
-import nivel2_sql_persistance.product_management.Decoration;
-import nivel2_sql_persistance.product_management.Flower;
-import nivel2_sql_persistance.product_management.Product;
-import nivel2_sql_persistance.product_management.Tree;
+import nivel2_sql_persistance.product_management.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -39,6 +34,10 @@ public class StockDAO {
 
     public List<Product> getStockFromDatabase() {
         return getProductsByStockStatus(true); // true for in stock
+    }
+
+    public List<Product> getSoldProductsFromDatabase() {
+        return getProductsByStockStatus(false); // false for sold
     }
 
     public void updateStockValue(int productId) throws SQLException {

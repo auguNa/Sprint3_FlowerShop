@@ -1,18 +1,10 @@
 package nivel2_sql_persistance.dao;
 
 import nivel2_sql_persistance.persistence.Ticket;
-
-import nivel2_sql_persistance.product_management.Decoration;
-import nivel2_sql_persistance.product_management.Flower;
-import nivel2_sql_persistance.product_management.Product;
-import nivel2_sql_persistance.product_management.Tree;
-import nivel2_sql_persistance.product_management.Material;
+import nivel2_sql_persistance.product_management.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SalesDAO {
     private Connection connection;
