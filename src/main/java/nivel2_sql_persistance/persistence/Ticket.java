@@ -1,6 +1,6 @@
-package Nivel1_txt_persistance.persistence;
+package nivel2_sql_persistance.persistence;
 
-import Nivel1_txt_persistance.product_management.Product;
+import nivel2_sql_persistance.product_management.Product;
 
 import java.util.List;
 

@@ -1,10 +1,9 @@
-package Nivel1_txt_persistance.menu;
+package nivel2_sql_persistance.menu;
 
-import Nivel1_txt_persistance.florist_management.FloristManagement;
-import Nivel1_txt_persistance.persistence.Ticket;
-import Nivel1_txt_persistance.product_management.Product;
+import nivel2_sql_persistance.florist_management.FloristManagement;
+import nivel2_sql_persistance.persistence.Ticket;
+import nivel2_sql_persistance.product_management.Product;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 public class SalesManagementMenu {
@@ -146,6 +145,8 @@ public class SalesManagementMenu {
     }
 
     private void showListOfOldPurchases() {
+        florist.loadStock();
+        florist.loadSales();
         List<Ticket> sales = florist.getSales();
         if (sales.isEmpty()) {
             System.out.println("No sales records.");
@@ -159,5 +160,3 @@ public class SalesManagementMenu {
         System.out.println("Total money earned from all sales: €" + totalSalesValue);
     }
 }
-
-

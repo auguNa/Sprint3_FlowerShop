@@ -1,8 +1,6 @@
-package nivel_1.factory;
+package nivel2_sql_persistance.factory;
 
-
-import Nivel1_txt_persistance.product_management.*;
-
+import nivel2_sql_persistance.product_management.*;
 
 public class ProductFactory {
     private static ProductFactory instance;

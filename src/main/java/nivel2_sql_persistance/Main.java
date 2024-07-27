@@ -1,6 +1,6 @@
-package Nivel1_txt_persistance;
+package nivel2_sql_persistance;
 
-import Nivel1_txt_persistance.menu.MainMenu;
+import nivel2_sql_persistance.menu.MainMenu;
 
 public class Main {
 

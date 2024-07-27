@@ -1,17 +1,25 @@
-package Nivel1_txt_persistance.product_management;
+package nivel2_sql_persistance.product_management;
 
+<<<<<<< HEAD:src/main/java/Nivel1_txt_persistance/product_management/Product.java
 import java.io.Serializable;
 
 public abstract class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
+=======
+public abstract class Product  {
+>>>>>>> sql_persistance:src/main/java/nivel2_sql_persistance/product_management/Product.java
     private static int counter = 1;
-    private final int id;
+    private int id;
     private double price;
 
     public Product(double price) {
         this.price = price;
-        this.id = counter++;
+        this.id = 0; // counter++;
+    }
+
+    public int getCounter() {
+        return counter;
     }
 
     public double getPrice() {
@@ -20,6 +28,10 @@ public abstract class Product implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public abstract String getAttribute();

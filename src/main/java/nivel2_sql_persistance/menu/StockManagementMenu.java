@@ -1,17 +1,20 @@
-package Nivel1_txt_persistance.menu;
+package nivel2_sql_persistance.menu;
 
-import Nivel1_txt_persistance.exception.InvalidDecorationType;
-import Nivel1_txt_persistance.florist_management.FloristManagement;
-import Nivel1_txt_persistance.product_management.*;
-
+import nivel2_sql_persistance.exception.InvalidDecorationTypeException;
+import nivel2_sql_persistance.factory.ProductFactory;
+import nivel2_sql_persistance.florist_management.FloristManagement;
+import nivel2_sql_persistance.product_management.Decoration;
+import nivel2_sql_persistance.product_management.Flower;
+import nivel2_sql_persistance.product_management.Product;
+import nivel2_sql_persistance.product_management.Tree;
 
 import java.util.*;
 
 public class StockManagementMenu {
     private FloristManagement florist;
-    private nivel_1.factory.ProductFactory factory;
+    private ProductFactory factory;
 
-    public StockManagementMenu(FloristManagement florist, nivel_1.factory.ProductFactory factory) {
+    public StockManagementMenu(FloristManagement florist, ProductFactory factory) {
         this.florist = florist;
         this.factory = factory;
     }
@@ -98,14 +101,22 @@ public class StockManagementMenu {
             System.out.println("Enter material (wood/plastic):");
             String material = sc.next();
             if (!material.equalsIgnoreCase("wood") && !material.equalsIgnoreCase("plastic")) {
+<<<<<<< HEAD:src/main/java/Nivel1_txt_persistance/menu/StockManagementMenu.java
                 throw new InvalidDecorationType("Invalid material type: " + material);
+=======
+                throw new InvalidDecorationTypeException("Invalid material type: " + material);
+>>>>>>> sql_persistance:src/main/java/nivel2_sql_persistance/menu/StockManagementMenu.java
             }
             Product decoration = factory.createProduct("decoration", price, material);
             florist.addProduct(decoration);
             System.out.println("Decoration added.");
+<<<<<<< HEAD:src/main/java/Nivel1_txt_persistance/menu/StockManagementMenu.java
         } catch (InvalidDecorationType e) {
             System.out.println("Error: " + e.getMessage());
         } catch (InputMismatchException e) {
+=======
+        } catch (InvalidDecorationTypeException e) {
+>>>>>>> sql_persistance:src/main/java/nivel2_sql_persistance/menu/StockManagementMenu.java
             System.out.println("Invalid input. Please enter a valid number for the price.");
             sc.next();
         }

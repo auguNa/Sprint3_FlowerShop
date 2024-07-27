@@ -1,4 +1,4 @@
-package Nivel1_txt_persistance.product_management;
+package nivel2_sql_persistance.product_management;
 
 public class Decoration extends Product {
     private Material material;
