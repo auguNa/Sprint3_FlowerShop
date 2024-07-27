@@ -1,6 +1,6 @@
-package Nivel1_txt_persistance.product_management;
+package nivel2_sql_persistance.product_management;
 
-public class Flower extends Product {
+public class Flower extends nivel2_sql_persistance.product_management.Product {
     private String color;
 
     public Flower(double price, String color) {

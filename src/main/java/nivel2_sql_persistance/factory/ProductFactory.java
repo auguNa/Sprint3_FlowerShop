@@ -1,10 +1,15 @@
-package Nivel1_txt_persistance.factory;
+package nivel2_sql_persistance.factory;
 
-import com.sun.source.tree.Tree;
+import nivel2_sql_persistance.product_management.Flower;
+import nivel2_sql_persistance.product_management.Material;
+import nivel2_sql_persistance.product_management.Product;
+import nivel2_sql_persistance.product_management.Tree;
 
 public class ProductFactory {
+    private static ProductFactory instance;
+
     private ProductFactory() {
-}
+    }
 
     public static ProductFactory getInstance() {
         if (instance == null) {
@@ -21,7 +26,7 @@ public class ProductFactory {
                 return new Flower(price, attribute);
             case "decoration":
                 Material material = Material.valueOf(attribute.toUpperCase());
-                return new Decoration(price, material);
+                return new nivel2_sql_persistance.product_management.Decoration(price, material);
             default:
                 throw new IllegalArgumentException("Invalid product type");
         }

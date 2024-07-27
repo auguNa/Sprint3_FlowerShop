@@ -1,8 +1,10 @@
-package Nivel1_txt_persistance.florist;
+package nivel2_sql_persistance.persistence;
 
-import java.io.Serializable;
+import nivel2_sql_persistance.product_management.Product;
 
-public class Ticket implements Serializable {
+import java.util.List;
+
+public class Ticket  {
     private List<Product> products;
 
     public Ticket(List<Product> products) {
@@ -11,6 +13,9 @@ public class Ticket implements Serializable {
 
     public double getTotalValue() {
         return products.stream().mapToDouble(Product::getPrice).sum();
+    }
+    public List<Product> getProducts() {
+        return products;
     }
 
     @Override

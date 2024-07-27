@@ -1,17 +1,16 @@
-package Nivel1_txt_persistance.menu;
+package nivel2_sql_persistance.menu;
 
-import Nivel1_txt_persistance.florist.Florist;
-import Nivel1_txt_persistance.florist.Ticket;
+import nivel2_sql_persistance.florist_management.FloristManagement;
+import nivel2_sql_persistance.persistence.Ticket;
+import nivel2_sql_persistance.product_management.Product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class SalesManagementMenu {
     Scanner sc = new Scanner(System.in);
-    private Florist florist;
+    private FloristManagement florist;
 
-    public SalesManagementMenu(Florist florist) {
+    public SalesManagementMenu(FloristManagement florist) {
         this.florist = florist;
     }
 
@@ -89,14 +88,31 @@ public class SalesManagementMenu {
                 System.out.println("Not enough stock available for the specified product.");
             }
         }
-
         if (!purchasedProducts.isEmpty()) {
             Ticket ticket = new Ticket(purchasedProducts);
             florist.addSale(ticket);
             System.out.println("Purchase ticket created.");
+            printTicketSummary(ticket);
         } else {
             System.out.println("No products purchased.");
         }
+    }
+
+    private void printTicketSummary(Ticket ticket) {
+        System.out.println("\n--- Purchase Ticket Summary ---");
+        Map<String, Integer> productSummary = new HashMap<>();
+
+        for (Product product : ticket.getProducts()) {
+            String productKey = product.getClass().getSimpleName() + " (" + product.getAttribute() + ")";
+            productSummary.put(productKey, productSummary.getOrDefault(productKey, 0) + 1);
+        }
+
+        for (Map.Entry<String, Integer> entry : productSummary.entrySet()) {
+            System.out.println("Product: " + entry.getKey() + ", Quantity: " + entry.getValue());
+        }
+
+        System.out.println("Total Value: €" + ticket.getTotalValue());
+        System.out.println("------------------------------\n");
     }
 
     private boolean checkStock(String type, String attribute, int quantity) {
@@ -129,6 +145,8 @@ public class SalesManagementMenu {
     }
 
     private void showListOfOldPurchases() {
+        florist.loadStock();
+        florist.loadSales();
         List<Ticket> sales = florist.getSales();
         if (sales.isEmpty()) {
             System.out.println("No sales records.");
@@ -141,6 +159,4 @@ public class SalesManagementMenu {
         double totalSalesValue = florist.getTotalSalesValue();
         System.out.println("Total money earned from all sales: €" + totalSalesValue);
     }
-}
-
 }

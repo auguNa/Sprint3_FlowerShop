@@ -1,18 +1,20 @@
-package Nivel1_txt_persistance.menu;
+package nivel2_sql_persistance.menu;
 
-import Nivel1_txt_persistance.factory.ProductFactory;
-import Nivel1_txt_persistance.florist.Florist;
-import com.sun.source.tree.Tree;
+import nivel2_sql_persistance.exception.InvalidDecorationTypeException;
+import nivel2_sql_persistance.factory.ProductFactory;
+import nivel2_sql_persistance.florist_management.FloristManagement;
+import nivel2_sql_persistance.product_management.Decoration;
+import nivel2_sql_persistance.product_management.Flower;
+import nivel2_sql_persistance.product_management.Product;
+import nivel2_sql_persistance.product_management.Tree;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class StockManagementMenu {
-    private Florist florist;
+    private FloristManagement florist;
     private ProductFactory factory;
 
-    public StockManagementMenu(Florist florist, ProductFactory factory) {
+    public StockManagementMenu(FloristManagement florist, ProductFactory factory) {
         this.florist = florist;
         this.factory = factory;
     }
@@ -92,13 +94,22 @@ public class StockManagementMenu {
     }
 
     private void addDecoration(Scanner sc) {
-        System.out.println("Enter price:");
-        double price = sc.nextDouble();
-        System.out.println("Enter material (wood/plastic):");
-        String material = sc.next();
-        Product decoration = factory.createProduct("decoration", price, material);
-        florist.addProduct(decoration);
-        System.out.println("Decoration added.");
+        try {
+            System.out.println("Enter price:");
+
+            double price = sc.nextDouble();
+            System.out.println("Enter material (wood/plastic):");
+            String material = sc.next();
+            if (!material.equalsIgnoreCase("wood") && !material.equalsIgnoreCase("plastic")) {
+                throw new InvalidDecorationTypeException("Invalid material type: " + material);
+            }
+            Product decoration = factory.createProduct("decoration", price, material);
+            florist.addProduct(decoration);
+            System.out.println("Decoration added.");
+        } catch (InvalidDecorationTypeException e) {
+            System.out.println("Invalid input. Please enter a valid number for the price.");
+            sc.next();
+        }
     }
 
     private void removeProduct(Scanner sc, Class<? extends Product> type) {
@@ -138,5 +149,3 @@ public class StockManagementMenu {
         System.out.println("Total stock value: €" + totalValue);
     }
 }
-
-

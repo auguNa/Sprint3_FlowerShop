@@ -1,12 +1,14 @@
-package Nivel1_txt_persistance.product_management;
+package nivel2_sql_persistance.product_management;
 
-public class Tree extends Product {
+public class Tree extends nivel2_sql_persistance.product_management.Product {
+
     private double height;
 
     public Tree(double price, double height) {
         super(price);
         this.height = height;
     }
+
 
     @Override
     public String getAttribute() {
