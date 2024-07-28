@@ -3,23 +3,26 @@ package nivel3_mongodb_persistance.connection;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import io.github.cdimascio.dotenv.Dotenv;
-
 
 public class MongoDBConnection {
     private static MongoClient mongoClient;
     private static MongoDatabase database;
 
-    Dotenv dotenv = Dotenv.load();
-    // dotenv.get("PASSWORD");
+    private static final String URI = System.getenv("MONGODB_URI");
+    private static final String DATABASE_NAME = "FlowerShop";
 
     public static void connect() {
-        String uri = "mongodb+srv://albamrquz3:<PASSWORD>L@flowershop.etspwlk.mongodb.net/?retryWrites=true&w=majority&appName=FlowerShop";
-
         if (mongoClient == null) {
-            mongoClient = MongoClients.create(uri);
-            database = mongoClient.getDatabase("FlowerShop");
-            System.out.println("Connected!");
+            try {
+                if (URI == null || URI.isEmpty()) {
+                    throw new IllegalStateException("MongoDB URI is not set or empty");
+                }
+                mongoClient = MongoClients.create(URI);
+                database = mongoClient.getDatabase(DATABASE_NAME);
+
+            } catch (Exception e) {
+                throw new RuntimeException("Database connection error", e);
+            }
         }
     }
 
@@ -27,16 +30,19 @@ public class MongoDBConnection {
         if (database == null) {
             throw new IllegalStateException("Connection not established. Call connect() first.");
         }
-        System.out.println("DB created!");
         return database;
     }
 
     public static void close() {
         if (mongoClient != null) {
-            mongoClient.close();
-            mongoClient = null;
-            database = null;
-            System.out.println("Disconnected!");
+            try {
+                mongoClient.close();
+            } catch (Exception e) {
+                System.out.println("Error closing MongoDB connection: " + e.getMessage());
+            } finally {
+                mongoClient = null;
+                database = null;
+            }
         }
     }
 }
