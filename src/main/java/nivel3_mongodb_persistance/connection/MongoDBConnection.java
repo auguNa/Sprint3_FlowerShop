@@ -3,8 +3,6 @@ package nivel3_mongodb_persistance.connection;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
-import io.github.cdimascio.dotenv.Dotenv;
-
 
 public class MongoDBConnection {
     private static MongoClient mongoClient;
