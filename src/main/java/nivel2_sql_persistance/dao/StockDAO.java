@@ -17,8 +17,8 @@ public class StockDAO {
         String insertQuery = "INSERT INTO Product (florist_id, stock, price, product_type, height, color, material) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(insertQuery)) {
-            stmt.setInt(1, getFloristId()); // Assume single florist, default ID
-            stmt.setBoolean(2, true); // Product is in stock
+            stmt.setInt(1, getFloristId());
+            stmt.setBoolean(2, true);
             stmt.setDouble(3, product.getPrice());
             stmt.setString(4, getProductType(product));
             stmt.setObject(5, getHeight(product));
@@ -33,11 +33,11 @@ public class StockDAO {
     }
 
     public List<Product> getStockFromDatabase() {
-        return getProductsByStockStatus(true); // true for in stock
+        return getProductsByStockStatus(true);
     }
 
     public List<Product> getSoldProductsFromDatabase() {
-        return getProductsByStockStatus(false); // false for sold
+        return getProductsByStockStatus(false);
     }
 
     public void updateStockValue(int productId) throws SQLException {
