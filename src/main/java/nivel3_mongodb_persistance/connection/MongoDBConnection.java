@@ -8,7 +8,7 @@ public class MongoDBConnection {
     private static MongoClient mongoClient;
     private static MongoDatabase database;
 
-    private static final String URI = System.getenv("MONGODB_URI");
+    private static final String URI = System.getenv().get("MONGODB_URI");
     private static final String DATABASE_NAME = "FlowerShop";
 
     public static void connect() {
